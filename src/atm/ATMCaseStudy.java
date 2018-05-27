@@ -1,5 +1,6 @@
 // ATMCaseStudy.java
 // Driver program for the ATM case study
+package atm;
 
 public class ATMCaseStudy
 {

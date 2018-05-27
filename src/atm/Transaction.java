@@ -1,5 +1,6 @@
 // Transaction.java
 // Abstract superclass Transaction represents an ATM transaction
+package atm;
 
 public abstract class Transaction
 {

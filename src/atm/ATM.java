@@ -1,5 +1,6 @@
 // ATM.java
 // Represents an automated teller machine
+package atm;
 
 public class ATM 
 {

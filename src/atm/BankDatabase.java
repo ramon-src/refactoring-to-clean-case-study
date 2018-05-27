@@ -1,5 +1,6 @@
 // BankDatabase.java
 // Represents the bank account information database 
+package atm;
 
 public class BankDatabase
 {

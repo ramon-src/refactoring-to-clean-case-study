@@ -1,5 +1,6 @@
 // CashDispenser.java
 // Represents the cash dispenser of the ATM
+package atm;
 
 public class CashDispenser 
 {
