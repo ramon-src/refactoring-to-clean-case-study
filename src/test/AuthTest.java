@@ -11,13 +11,13 @@ public class AuthTest {
 	@Test
 	public void shouldAuthenticateUser() {
 		Auth auth = new Auth();
-		assertEquals(true, auth.authenticateUser(12345, 54321));
+		assertEquals(true, auth.authenticate(12345, 54321));
 	}	
 	
 	@Test
 	public void shouldNotAuthenticateUser() {
 		Auth service = new Auth();
-		assertEquals(false, service.authenticateUser(1245, 54321));
+		assertEquals(false, service.authenticate(1245, 54321));
 	}
 }
 
