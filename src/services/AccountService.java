@@ -1,6 +1,6 @@
 // BankDatabase.java
 // Represents the bank account information database 
-package atm;
+package services;
 
 import entities.Account;
 

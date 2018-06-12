@@ -2,6 +2,8 @@
 // Represents a deposit ATM transaction
 package atm;
 
+import services.AccountService;
+
 public class Deposit extends Transaction
 {
    private double amount; // amount to deposit

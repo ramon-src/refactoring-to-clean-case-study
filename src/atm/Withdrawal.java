@@ -2,6 +2,8 @@
 // Represents a withdrawal ATM transaction
 package atm;
 
+import services.AccountService;
+
 public class Withdrawal extends Transaction
 {
    private int amount; // amount to withdraw

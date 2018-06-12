@@ -2,6 +2,8 @@
 // Represents an automated teller machine
 package atm;
 
+import services.AccountService;
+
 public class ATM 
 {
    private boolean userAuthenticated; // whether user is authenticated
@@ -10,7 +12,7 @@ public class ATM
    private Keypad keypad; // ATM's keypad
    private CashDispenser cashDispenser; // ATM's cash dispenser
    private DepositSlot depositSlot; // ATM's deposit slot
-   private AccountService bankDatabase; // account information database
+   private AccountService accountService; // account information database
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -22,12 +24,12 @@ public class ATM
    public ATM() 
    {
       userAuthenticated = false; // user is not authenticated to start
-      currentAccountNumber = 0; // no current account number to start
+      setCurrentAccountNumber(0); // no current account number to start
       screen = new Screen(); // create screen
       keypad = new Keypad(); // create keypad 
       cashDispenser = new CashDispenser(); // create cash dispenser
       depositSlot = new DepositSlot(); // create deposit slot
-      bankDatabase = new AccountService(); // create acct info database
+      accountService = new AccountService(); // create acct info database
    } // end no-argument ATM constructor
 
    // start ATM 
@@ -39,33 +41,33 @@ public class ATM
          // loop while user is not yet authenticated
          while (!userAuthenticated) 
          {
-            screen.displayMessageLine("\nWelcome!");       
-            authenticateUser(); // authenticate user
+            screen.displayMessageLine("\nWelcome!");
+            screen.displayMessage("\nPlease enter your account number: ");
+            int accountNumber = keypad.getInput(); // input account number
+            screen.displayMessage("\nEnter your PIN: "); // prompt for PIN
+            int pin = keypad.getInput(); // input PIN
+            
+            authenticateUser(accountNumber, pin); // authenticate user
          } // end while
          
          performTransactions(); // user is now authenticated 
          userAuthenticated = false; // reset before next ATM session
-         currentAccountNumber = 0; // reset before next ATM session 
+         setCurrentAccountNumber(0); // reset before next ATM session 
          screen.displayMessageLine("\nThank you! Goodbye!");
       } // end while   
    } // end method run
 
    // attempts to authenticate user against database
-   private void authenticateUser() 
-   {
-      screen.displayMessage("\nPlease enter your account number: ");
-      int accountNumber = keypad.getInput(); // input account number
-      screen.displayMessage("\nEnter your PIN: "); // prompt for PIN
-      int pin = keypad.getInput(); // input PIN
-      
+   public void authenticateUser(int accountNumber, int pin) 
+   {      
       // set userAuthenticated to boolean value returned by database
       userAuthenticated = 
-         bankDatabase.authenticateUser(accountNumber, pin);
+         accountService.authenticateUser(accountNumber, pin);
       
       // check whether authentication succeeded
       if (userAuthenticated)
       {
-         currentAccountNumber = accountNumber; // save user's account #
+         setCurrentAccountNumber(accountNumber); // save user's account #
       } // end if
       else
          screen.displayMessageLine(
@@ -134,20 +136,28 @@ public class ATM
       {
          case BALANCE_INQUIRY: // create new BalanceInquiry transaction
             temp = new BalanceInquiry(
-               currentAccountNumber, screen, bankDatabase);
+               getCurrentAccountNumber(), screen, accountService);
             break;
          case WITHDRAWAL: // create new Withdrawal transaction
-            temp = new Withdrawal(currentAccountNumber, screen, 
-               bankDatabase, keypad, cashDispenser);
+            temp = new Withdrawal(getCurrentAccountNumber(), screen, 
+               accountService, keypad, cashDispenser);
             break; 
          case DEPOSIT: // create new Deposit transaction
-            temp = new Deposit(currentAccountNumber, screen, 
-               bankDatabase, keypad, depositSlot);
+            temp = new Deposit(getCurrentAccountNumber(), screen, 
+               accountService, keypad, depositSlot);
             break;
       } // end switch
 
       return temp; // return the newly created object
    } // end method createTransaction
+
+public int getCurrentAccountNumber() {
+	return currentAccountNumber;
+}
+
+public void setCurrentAccountNumber(int currentAccountNumber) {
+	this.currentAccountNumber = currentAccountNumber;
+}
 } // end class ATM
 
 

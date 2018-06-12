@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import atm.AccountService;
 import entities.Account;
+import services.AccountService;
 
 public class AccountServiceTest {
 
@@ -21,4 +21,15 @@ public class AccountServiceTest {
 		assertEquals(null, service.find(14));
 	}
 	
+	@Test
+	public void shouldAuthenticateUser() {
+		AccountService service = new AccountService();
+		assertEquals(true, service.authenticateUser(12345, 54321));
+	}	
+	
+	@Test
+	public void shouldNotAuthenticateUser() {
+		AccountService service = new AccountService();
+		assertEquals(false, service.authenticateUser(1245, 54321));
+	}
 }

@@ -2,6 +2,8 @@
 // Represents a balance inquiry ATM transaction
 package atm;
 
+import services.AccountService;
+
 public class BalanceInquiry extends Transaction
 {
    // BalanceInquiry constructor

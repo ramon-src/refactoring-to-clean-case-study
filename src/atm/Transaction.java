@@ -2,6 +2,8 @@
 // Abstract superclass Transaction represents an ATM transaction
 package atm;
 
+import services.AccountService;
+
 public abstract class Transaction
 {
    private int accountNumber; // indicates account involved
