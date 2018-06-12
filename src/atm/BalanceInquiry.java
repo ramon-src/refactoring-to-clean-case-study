@@ -6,7 +6,7 @@ public class BalanceInquiry extends Transaction
 {
    // BalanceInquiry constructor
    public BalanceInquiry(int userAccountNumber, Screen atmScreen, 
-      BankDatabase atmBankDatabase)
+      AccountService atmBankDatabase)
    {
       super(userAccountNumber, atmScreen, atmBankDatabase);
    } // end BalanceInquiry constructor
@@ -16,7 +16,7 @@ public class BalanceInquiry extends Transaction
    public void execute()
    {
       // get references to bank database and screen
-      BankDatabase bankDatabase = getBankDatabase();
+      AccountService bankDatabase = getBankDatabase();
       Screen screen = getScreen();
 
       // get the available balance for the account involved

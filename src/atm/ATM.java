@@ -10,7 +10,7 @@ public class ATM
    private Keypad keypad; // ATM's keypad
    private CashDispenser cashDispenser; // ATM's cash dispenser
    private DepositSlot depositSlot; // ATM's deposit slot
-   private BankDatabase bankDatabase; // account information database
+   private AccountService bankDatabase; // account information database
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -27,7 +27,7 @@ public class ATM
       keypad = new Keypad(); // create keypad 
       cashDispenser = new CashDispenser(); // create cash dispenser
       depositSlot = new DepositSlot(); // create deposit slot
-      bankDatabase = new BankDatabase(); // create acct info database
+      bankDatabase = new AccountService(); // create acct info database
    } // end no-argument ATM constructor
 
    // start ATM 
@@ -125,7 +125,7 @@ public class ATM
    } // end method displayMainMenu
          
    // return object of specified Transaction subclass
-   private Transaction createTransaction(int type)
+   public Transaction createTransaction(int type)
    {
       Transaction temp = null; // temporary Transaction variable
       

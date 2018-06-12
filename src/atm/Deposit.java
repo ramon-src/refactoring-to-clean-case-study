@@ -11,7 +11,7 @@ public class Deposit extends Transaction
 
    // Deposit constructor
    public Deposit(int userAccountNumber, Screen atmScreen, 
-      BankDatabase atmBankDatabase, Keypad atmKeypad, 
+      AccountService atmBankDatabase, Keypad atmKeypad, 
       DepositSlot atmDepositSlot)
    {
       // initialize superclass variables
@@ -26,7 +26,7 @@ public class Deposit extends Transaction
    @Override
    public void execute()
    {
-      BankDatabase bankDatabase = getBankDatabase(); // get reference
+      AccountService bankDatabase = getBankDatabase(); // get reference
       Screen screen = getScreen(); // get reference
 
       amount = promptForDepositAmount(); // get deposit amount from user
