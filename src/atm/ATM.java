@@ -2,6 +2,7 @@
 // Represents an automated teller machine
 package atm;
 
+import entities.Auth;
 import services.AccountService;
 
 public class ATM 
@@ -12,6 +13,7 @@ public class ATM
    private Keypad keypad; // ATM's keypad
    private CashDispenser cashDispenser; // ATM's cash dispenser
    private DepositSlot depositSlot; // ATM's deposit slot
+   private Auth auth; // account information database
    private AccountService accountService; // account information database
 
    // constants corresponding to main menu options
@@ -30,6 +32,7 @@ public class ATM
       cashDispenser = new CashDispenser(); // create cash dispenser
       depositSlot = new DepositSlot(); // create deposit slot
       accountService = new AccountService(); // create acct info database
+      auth = new Auth();
    } // end no-argument ATM constructor
 
    // start ATM 
@@ -62,7 +65,7 @@ public class ATM
    {      
       // set userAuthenticated to boolean value returned by database
       userAuthenticated = 
-         accountService.authenticateUser(accountNumber, pin);
+         auth.authenticateUser(accountNumber, pin);
       
       // check whether authentication succeeded
       if (userAuthenticated)
@@ -140,11 +143,11 @@ public class ATM
             break;
          case WITHDRAWAL: // create new Withdrawal transaction
             temp = new Withdrawal(getCurrentAccountNumber(), screen, 
-               accountService, keypad, cashDispenser);
+            		accountService, keypad, cashDispenser);
             break; 
          case DEPOSIT: // create new Deposit transaction
             temp = new Deposit(getCurrentAccountNumber(), screen, 
-               accountService, keypad, depositSlot);
+            		accountService, keypad, depositSlot);
             break;
       } // end switch
 

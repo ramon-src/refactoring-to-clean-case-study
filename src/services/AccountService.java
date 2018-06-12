@@ -26,21 +26,7 @@ public class AccountService
 
       return null;
    }
-
-   // determine whether user-specified account number and PIN match
-   // those of an account in the database
-   public boolean authenticateUser(int userAccountNumber, int userPIN)
-   {
-      // attempt to retrieve the account with the account number
-      Account userAccount = find(userAccountNumber);
-
-      // if account exists, return result of Account method validatePIN
-      if (userAccount != null)
-         return userAccount.validatePIN(userPIN);
-      else
-         return false; // account number not found, so return false
-   } // end method authenticateUser
-
+   
    // return available balance of Account with specified account number
    public double getAvailableBalance(int userAccountNumber)
    {
