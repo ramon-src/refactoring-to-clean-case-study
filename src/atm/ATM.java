@@ -61,8 +61,7 @@ public class ATM {
 
 		if (isUserAuthenticated) {
 			setCurrentAccountNumber(accountNumber); // save user's account #
-		}
-		else
+		} else
 			screen.displayMessageLine("Invalid account number or PIN. Please try again.");
 	} // end method authenticateUser
 
