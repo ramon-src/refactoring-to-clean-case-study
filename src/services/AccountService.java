@@ -3,28 +3,22 @@
 package services;
 
 import entities.Account;
+import entities.DataRepository;
+import persistence.AccountInMemoryRepository;
 
 public class AccountService
 {
    private Account accounts[]; // array of Accounts
-   
+   private DataRepository<Account> accountRepo;
    // no-argument BankDatabase constructor initializes accounts
    public AccountService()
    {
-      accounts = new Account[2]; // just 2 accounts for testing
-      accounts[0] = new Account(12345, 54321L, 1000.0, 1200.0);
-      accounts[1] = new Account(98765, 56789L, 200.0, 200.0);  
+	   accountRepo = new AccountInMemoryRepository();
    } // end no-argument BankDatabase constructor
    
-   public Account find(int accountNumber)
+   public Account find(int userAccountNumber)
    {
-      for (Account account : accounts)
-      {
-         if (account.getNumber() == accountNumber)
-            return account;
-      }
-
-      return null;
+	   return accountRepo.find(userAccountNumber);
    }
    
    public Boolean validatePin(Account account, Long pin) {
@@ -34,25 +28,25 @@ public class AccountService
    // return available balance of Account with specified account number
    public double getAvailableBalance(int userAccountNumber)
    {
-      return find(userAccountNumber).getAvailableBalance();
+      return accountRepo.find(userAccountNumber).getAvailableBalance();
    } // end method getAvailableBalance
 
    // return total balance of Account with specified account number
    public double getTotalBalance(int userAccountNumber)
    {
-      return find(userAccountNumber).getTotalBalance();
+      return accountRepo.find(userAccountNumber).getTotalBalance();
    } // end method getTotalBalance
 
    // credit an amount to Account with specified account number
    public void credit(int userAccountNumber, double amount)
    {
-      find(userAccountNumber).credit(amount);
+	   accountRepo.find(userAccountNumber).credit(amount);
    } // end method credit
 
    // debit an amount from Account with specified account number
    public void debit(int userAccountNumber, double amount)
    {
-      find(userAccountNumber).debit(amount);
+	   accountRepo.find(userAccountNumber).debit(amount);
    } // end method debit
 } // end class BankDatabase
 
