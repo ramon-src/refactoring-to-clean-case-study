@@ -1,36 +1,38 @@
-package entities;
+package services;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import entities.Auth;
+import entities.Account;
+import main.Bootstrapper;
+import services.AuthService;
 
-public class AuthTest {
+public class AuthServiceTest {
 
 	@Test
 	public void shouldAuthenticateUser() {
-		Auth auth = new Auth();
+		AuthService auth = new AuthService();
 		assertEquals(true, auth.authenticate(12345, 54321));
 	}	
 	
 	@Test
 	public void shouldNotAuthenticateUser() {
-		Auth service = new Auth();
+		AuthService service = new AuthService();
 		assertEquals(false, service.authenticate(3451, 54321));
 	}
 	
 	@Test
 	public void shouldNotAuthenticateUserWhenPinIsNotValid() {
-		Auth service = new Auth();
+		AuthService service = new AuthService();
 		assertEquals(false, service.authenticate(12345, 545484));
 	}
 	
 	@Test
 	public void shouldUserExistsAfterAuthenticate() {
-		Auth auth = new Auth();
+		AuthService auth = new AuthService();
 		auth.authenticate(12345, 54321);
-		assertEquals(new Account(12345, 54321, 0, 0).getNumber(), auth.getUser().getNumber());
+		assertEquals(new Account(12345, 54321L, 0, 0).getNumber(), Bootstrapper.user().getAccount().getNumber());
 	}
 }
 

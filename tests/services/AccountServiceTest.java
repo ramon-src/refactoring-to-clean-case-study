@@ -12,7 +12,7 @@ public class AccountServiceTest {
 	@Test
 	public void shouldFindAccount () {
 		AccountService service = new AccountService();
-		assertEquals(new Account(12345,15,123,12).getNumber(), service.find(12345).getNumber());
+		assertEquals(new Account(12345,15L,123,12).getNumber(), service.find(12345).getNumber());
 	}
 
 	@Test

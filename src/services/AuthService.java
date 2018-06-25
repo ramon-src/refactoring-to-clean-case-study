@@ -1,27 +1,27 @@
-package entities;
+package services;
 
-import services.AccountService;
+import entities.Account;
+import entities.User;
+import main.Bootstrapper;
 
-public class Auth {
-	private Account account;
+public class AuthService {
 	private AccountService service;
+	private User user;
 
-	public Auth() {
+	public AuthService() {
 		service = new AccountService();
+		user = new User();
 	}
 
 	public Boolean authenticate(int userAccountNumber, int userPIN) {
 		Account account = service.find(userAccountNumber);
 		if (account != null && account.validatePIN(userPIN)) {
-			this.account = account;
+			user.setAccount(account);
+			user.setIsAuthenticated(true);
+			Bootstrapper.setUser(user);
 			return true;
 		}
 		return false;
 	}
-	
-	public Account getUser() {
-		return account;
-	}
-	
-	
+
 }

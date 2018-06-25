@@ -5,12 +5,12 @@ package entities;
 public class Account {
 	private Account accounts[];
 	private int number; // account number
-	private int pin; // PIN for authentication
+	private Long pin; // PIN for authentication
 	private double availableBalance; // funds available for withdrawal
 	private double totalBalance; // funds available + pending deposits
 
 	// Account constructor initializes attributes
-	public Account(int theAccountNumber, int thePIN, double theAvailableBalance, double theTotalBalance) {
+	public Account(int theAccountNumber, Long thePIN, double theAvailableBalance, double theTotalBalance) {
 		number = theAccountNumber;
 		pin = thePIN;
 		availableBalance = theAvailableBalance;
@@ -57,6 +57,10 @@ public class Account {
 
 	private void setAccounts(Account accounts[]) {
 		this.accounts = accounts;
+	}
+
+	public Long getPin() {
+		return pin;
 	}
 } // end class Account
 

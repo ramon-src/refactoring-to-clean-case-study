@@ -12,8 +12,8 @@ public class AccountService
    public AccountService()
    {
       accounts = new Account[2]; // just 2 accounts for testing
-      accounts[0] = new Account(12345, 54321, 1000.0, 1200.0);
-      accounts[1] = new Account(98765, 56789, 200.0, 200.0);  
+      accounts[0] = new Account(12345, 54321L, 1000.0, 1200.0);
+      accounts[1] = new Account(98765, 56789L, 200.0, 200.0);  
    } // end no-argument BankDatabase constructor
    
    public Account find(int accountNumber)
@@ -25,6 +25,10 @@ public class AccountService
       }
 
       return null;
+   }
+   
+   public Boolean validatePin(Account account, Long pin) {
+	   return account.getPin() == pin;
    }
    
    // return available balance of Account with specified account number

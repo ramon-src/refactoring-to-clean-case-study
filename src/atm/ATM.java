@@ -2,17 +2,17 @@
 // Represents an automated teller machine
 package atm;
 
-import entities.Auth;
+import main.Bootstrapper;
 import services.AccountService;
+import services.AuthService;
 
 public class ATM {
-	private boolean isUserAuthenticated; // whether user is authenticated
 	private int currentAccountNumber; // current user's account number
 	private Screen screen; // ATM's screen
 	private Keypad keypad; // ATM's keypad
 	private CashDispenser cashDispenser; // ATM's cash dispenser
 	private DepositSlot depositSlot; // ATM's deposit slot
-	private Auth auth; // account information database
+	private AuthService auth; // account information database
 	private AccountService accountService; // account information database
 
 	// constants corresponding to main menu options
@@ -23,14 +23,13 @@ public class ATM {
 
 	// no-argument ATM constructor initializes instance variables
 	public ATM() {
-		isUserAuthenticated = false; // user is not authenticated to start
 		setCurrentAccountNumber(0); // no current account number to start
 		screen = new Screen(); // create screen
 		keypad = new Keypad(); // create keypad
 		cashDispenser = new CashDispenser(); // create cash dispenser
 		depositSlot = new DepositSlot(); // create deposit slot
 		accountService = new AccountService(); // create acct info database
-		auth = new Auth();
+		auth = new AuthService();
 	} // end no-argument ATM constructor
 
 	// start ATM
@@ -38,32 +37,23 @@ public class ATM {
 		// welcome and authenticate user; perform transactions
 		while (true) {
 			// loop while user is not yet authenticated
-			while (!isUserAuthenticated) {
+			while (!Bootstrapper.user().isAuthenticated()) {
 				screen.displayMessageLine("\nWelcome!");
 				screen.displayMessage("\nPlease enter your account number: ");
 				int accountNumber = keypad.getInput(); // input account number
 				screen.displayMessage("\nEnter your PIN: "); // prompt for PIN
 				int pin = keypad.getInput(); // input PIN
 
-				authenticateUser(accountNumber, pin); // authenticate user
+				Boolean isAuthenticated = auth.authenticate(accountNumber, pin);
+				if (!isAuthenticated)
+					screen.displayMessageLine("Invalid account number or PIN. Please try again.");
 			} // end while
 
 			performTransactions(); // user is now authenticated
-			isUserAuthenticated = false; // reset before next ATM session
-			setCurrentAccountNumber(0); // reset before next ATM session
+			Bootstrapper.setUser(null);
 			screen.displayMessageLine("\nThank you! Goodbye!");
 		} // end while
 	} // end method run
-
-	// attempts to authenticate user against database
-	public void authenticateUser(int accountNumber, int pin) {
-		isUserAuthenticated = auth.authenticate(accountNumber, pin);
-
-		if (isUserAuthenticated) {
-			setCurrentAccountNumber(accountNumber); // save user's account #
-		} else
-			screen.displayMessageLine("Invalid account number or PIN. Please try again.");
-	} // end method authenticateUser
 
 	// display the main menu and perform transactions
 	private void performTransactions() {
@@ -116,15 +106,16 @@ public class ATM {
 		Transaction temp = null; // temporary Transaction variable
 
 		// determine which type of Transaction to create
+		Integer numberAccount = Bootstrapper.user().getAccount().getNumber();
 		switch (type) {
 		case BALANCE_INQUIRY: // create new BalanceInquiry transaction
-			temp = new BalanceInquiry(getCurrentAccountNumber(), screen, accountService);
+			temp = new BalanceInquiry(numberAccount, screen, accountService);
 			break;
 		case WITHDRAWAL: // create new Withdrawal transaction
-			temp = new Withdrawal(getCurrentAccountNumber(), screen, accountService, keypad, cashDispenser);
+			temp = new Withdrawal(numberAccount, screen, accountService, keypad, cashDispenser);
 			break;
 		case DEPOSIT: // create new Deposit transaction
-			temp = new Deposit(getCurrentAccountNumber(), screen, accountService, keypad, depositSlot);
+			temp = new Deposit(numberAccount, screen, accountService, keypad, depositSlot);
 			break;
 		} // end switch
 
