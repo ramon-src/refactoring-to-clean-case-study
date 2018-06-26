@@ -2,13 +2,13 @@ package services;
 
 import entities.Account;
 import entities.DataRepository;
-import persistence.AccountInMemoryRepository;
+import main.Bootstrapper;
 
 public class AccountService {
 	private DataRepository<Account> accountRepo;
 
 	public AccountService() {
-		accountRepo = new AccountInMemoryRepository();
+		accountRepo = Bootstrapper.getAccountRepo();
 	}
 
 	public Account find(int userAccountNumber) {

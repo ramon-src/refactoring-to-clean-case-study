@@ -10,7 +10,7 @@ import atm.Withdrawal;
 import main.Bootstrapper;
 import mocks.KeypadMock;
 
-public class ATMTest {
+public class ATMTest extends SuiteTest{
 
 	@Test
 	public void shouldPerformWithdrawalAction() {

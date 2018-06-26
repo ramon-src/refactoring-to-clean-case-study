@@ -20,7 +20,7 @@ public class TransactionFactory {
 			return new Withdrawal(0, new Screen(), new AccountService(), new CashDispenser());
 		}
 		if (type.equals(TransactionType.DEPOSIT)) {
-			return new Deposit(0, new Screen(), new AccountService(), new DepositSlot());
+			return new Deposit();
 		}
 
 		return null;

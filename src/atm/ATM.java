@@ -105,7 +105,7 @@ public class ATM {
 			temp = new Withdrawal(numberAccount, screen, accountService, cashDispenser);
 			break;
 		case DEPOSIT:
-			temp = new Deposit(numberAccount, screen, accountService, depositSlot);
+			temp = new Deposit();
 			break;
 		}
 

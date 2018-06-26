@@ -5,9 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import entities.Account;
+import entities.SuiteTest;
 import services.AccountService;
 
-public class AccountServiceTest {
+public class AccountServiceTest extends SuiteTest {
 
 	@Test
 	public void shouldFindAccount () {

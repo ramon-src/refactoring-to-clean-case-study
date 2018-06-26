@@ -7,8 +7,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import entities.Account;
+import entities.SuiteTest;
 
-public class AccountInMemoryRepositoryTest {
+public class AccountInMemoryRepositoryTest extends SuiteTest{
 	
 	@Test
 	public void shouldFindAllAgents() {

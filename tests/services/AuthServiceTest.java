@@ -5,10 +5,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import entities.Account;
+import entities.SuiteTest;
 import main.Bootstrapper;
 import services.AuthService;
 
-public class AuthServiceTest {
+public class AuthServiceTest extends SuiteTest {
 
 	@Test
 	public void shouldAuthenticateUser() {

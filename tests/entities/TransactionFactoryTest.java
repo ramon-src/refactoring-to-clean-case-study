@@ -9,7 +9,7 @@ import atm.BalanceInquiry;
 import atm.Deposit;
 import atm.Withdrawal;
 
-public class TransactionFactoryTest {
+public class TransactionFactoryTest extends SuiteTest{
 	
 	public TransactionFactory factory;
 	

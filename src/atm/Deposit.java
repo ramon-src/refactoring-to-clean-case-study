@@ -7,23 +7,19 @@ import ui.Input;
 import ui.Keypad;
 
 public class Deposit extends Transaction {
-	private double amount; // amount to deposit
-	private Input keypad; // reference to keypad
-	private DepositSlot depositSlot; // reference to deposit slot
-	private final static int CANCELED = 0; // constant for cancel option
+	private double amount;
+	private Input keypad;
+	private DepositSlot depositSlot;
+	private final static int CANCELED = 0;
 
-	// Deposit constructor
-	public Deposit(int userAccountNumber, Screen atmScreen, AccountService atmBankDatabase,
-			DepositSlot atmDepositSlot) {
-		// initialize superclass variables
-		super(userAccountNumber, atmScreen, atmBankDatabase);
+	public Deposit() {
+	
+		super(0, new Screen(), new AccountService());
 
-		// initialize references to keypad and deposit slot
 		setKeypad(new Keypad());
-		depositSlot = atmDepositSlot;
-	} // end Deposit constructor
-
-	// perform transaction
+		depositSlot = new DepositSlot();
+	}
+	
 	@Override
 	public void execute() {
 		AccountService bankDatabase = getBankDatabase(); // get reference
@@ -62,11 +58,9 @@ public class Deposit extends Transaction {
 		} // end else
 	} // end method execute
 
-	// prompt user to enter a deposit amount in cents
 	private double promptForDepositAmount() {
-		Screen screen = getScreen(); // get reference to screen
+		Screen screen = getScreen();
 
-		// display the prompt
 		screen.displayMessage("\nPlease enter a deposit amount in " + "CENTS (or 0 to cancel): ");
 		int input = getKeypad().getInput(); // receive input of deposit amount
 
@@ -86,16 +80,3 @@ public class Deposit extends Transaction {
 		this.keypad = keypad;
 	}
 } // end class Deposit
-
-/**************************************************************************
- * (C) Copyright 1992-2014 by Deitel & Associates, Inc. and * Pearson Education,
- * Inc. All Rights Reserved. * * DISCLAIMER: The authors and publisher of this
- * book have used their * best efforts in preparing the book. These efforts
- * include the * development, research, and testing of the theories and programs
- * * to determine their effectiveness. The authors and publisher make * no
- * warranty of any kind, expressed or implied, with regard to these * programs
- * or to the documentation contained in these books. The authors * and publisher
- * shall not be liable in any event for incidental or * consequential damages in
- * connection with, or arising out of, the * furnishing, performance, or use of
- * these programs. *
- *************************************************************************/
