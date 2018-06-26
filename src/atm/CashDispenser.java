@@ -11,14 +11,14 @@ public class CashDispenser
    // no-argument CashDispenser constructor initializes count to default
    public CashDispenser()
    {
-      count = INITIAL_COUNT; // set count attribute to default
+      setCount(INITIAL_COUNT); // set count attribute to default
    } // end CashDispenser constructor
 
    // simulates dispensing of specified amount of cash
    public void dispenseCash(int amount)
    {
       int billsRequired = amount / 20; // number of $20 bills required
-      count -= billsRequired; // update the count of bills
+      setCount(getCount() - billsRequired); // update the count of bills
    } // end method dispenseCash
 
    // indicates whether cash dispenser can dispense desired amount
@@ -26,11 +26,19 @@ public class CashDispenser
    {
       int billsRequired = amount / 20; // number of $20 bills required
 
-      if (count >= billsRequired )
+      if (getCount() >= billsRequired )
          return true; // enough bills available
       else 
          return false; // not enough bills available
    } // end method isSufficientCashAvailable
+
+	public int getCount() {
+		return count;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
+	}
 } // end class CashDispenser
 
 

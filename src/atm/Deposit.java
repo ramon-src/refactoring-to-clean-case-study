@@ -3,6 +3,7 @@
 package atm;
 
 import services.AccountService;
+import ui.Keypad;
 
 public class Deposit extends Transaction
 {
@@ -13,14 +14,14 @@ public class Deposit extends Transaction
 
    // Deposit constructor
    public Deposit(int userAccountNumber, Screen atmScreen, 
-      AccountService atmBankDatabase, Keypad atmKeypad, 
+      AccountService atmBankDatabase, 
       DepositSlot atmDepositSlot)
    {
       // initialize superclass variables
       super(userAccountNumber, atmScreen, atmBankDatabase);
 
       // initialize references to keypad and deposit slot
-      keypad = atmKeypad;
+      keypad = new Keypad();
       depositSlot = atmDepositSlot;
    } // end Deposit constructor
 

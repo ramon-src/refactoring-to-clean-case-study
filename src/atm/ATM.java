@@ -1,19 +1,19 @@
-// ATM.java
-// Represents an automated teller machine
 package atm;
 
 import main.Bootstrapper;
 import services.AccountService;
 import services.AuthService;
+import ui.Input;
+import ui.Keypad;
 
 public class ATM {
 	private int currentAccountNumber; // current user's account number
 	private Screen screen; // ATM's screen
-	private Keypad keypad; // ATM's keypad
+	private Input keypad; // ATM's keypad
 	private CashDispenser cashDispenser; // ATM's cash dispenser
 	private DepositSlot depositSlot; // ATM's deposit slot
-	private AuthService auth; // account information database
-	private AccountService accountService; // account information database
+	private AuthService auth;
+	private AccountService accountService;
 
 	// constants corresponding to main menu options
 	private static final int BALANCE_INQUIRY = 1;
@@ -21,7 +21,6 @@ public class ATM {
 	private static final int DEPOSIT = 3;
 	private static final int EXIT = 4;
 
-	// no-argument ATM constructor initializes instance variables
 	public ATM() {
 		setCurrentAccountNumber(0); // no current account number to start
 		screen = new Screen(); // create screen
@@ -49,46 +48,41 @@ public class ATM {
 					screen.displayMessageLine("Invalid account number or PIN. Please try again.");
 			} // end while
 
-			performTransactions(); // user is now authenticated
+			boolean userExited = false;
+			while (!userExited) {
+				int mainMenuSelection = displayMainMenu();
+				userExited = performTransactions(mainMenuSelection);
+			} // user is now authenticated
 			Bootstrapper.setUser(null);
 			screen.displayMessageLine("\nThank you! Goodbye!");
 		} // end while
 	} // end method run
 
 	// display the main menu and perform transactions
-	private void performTransactions() {
-		// local variable to store transaction currently being processed
+	protected Boolean performTransactions(int mainMenuSelection) {
 		Transaction currentTransaction = null;
 
-		boolean userExited = false; // user has not chosen to exit
+		boolean userExited = false;
 
-		// loop while user has not chosen option to exit system
-		while (!userExited) {
-			// show main menu and get user selection
-			int mainMenuSelection = displayMainMenu();
+		switch (mainMenuSelection) {
 
-			// decide how to proceed based on user's menu selection
-			switch (mainMenuSelection) {
-			// user chose to perform one of three transaction types
-			case BALANCE_INQUIRY:
-			case WITHDRAWAL:
-			case DEPOSIT:
+		case BALANCE_INQUIRY:
+		case WITHDRAWAL:
+		case DEPOSIT:
+			currentTransaction = createTransaction(mainMenuSelection);
 
-				// initialize as new object of chosen type
-				currentTransaction = createTransaction(mainMenuSelection);
-
-				currentTransaction.execute(); // execute transaction
-				break;
-			case EXIT: // user chose to terminate session
-				screen.displayMessageLine("\nExiting the system...");
-				userExited = true; // this ATM session should end
-				break;
-			default: // user did not enter an integer from 1-4
-				screen.displayMessageLine("\nYou did not enter a valid selection. Try again.");
-				break;
-			} // end switch
-		} // end while
-	} // end method performTransactions
+			currentTransaction.execute();
+			break;
+		case EXIT:
+			screen.displayMessageLine("\nExiting the system...");
+			userExited = true;
+			break;
+		default:
+			screen.displayMessageLine("\nYou did not enter a valid selection. Try again.");
+			break;
+		}
+		return userExited;
+	}
 
 	// display the main menu and return an input selection
 	private int displayMainMenu() {
@@ -112,10 +106,10 @@ public class ATM {
 			temp = new BalanceInquiry(numberAccount, screen, accountService);
 			break;
 		case WITHDRAWAL: // create new Withdrawal transaction
-			temp = new Withdrawal(numberAccount, screen, accountService, keypad, cashDispenser);
+			temp = new Withdrawal(numberAccount, screen, accountService, cashDispenser);
 			break;
 		case DEPOSIT: // create new Deposit transaction
-			temp = new Deposit(numberAccount, screen, accountService, keypad, depositSlot);
+			temp = new Deposit(numberAccount, screen, accountService, depositSlot);
 			break;
 		} // end switch
 
