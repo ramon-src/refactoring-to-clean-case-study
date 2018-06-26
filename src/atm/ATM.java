@@ -58,7 +58,16 @@ public class ATM {
 		} // end while
 	} // end method run
 
-	// display the main menu and perform transactions
+	private int displayMainMenu() {
+		screen.displayMessageLine("\nMain menu:");
+		screen.displayMessageLine("1 - View my balance");
+		screen.displayMessageLine("2 - Withdraw cash");
+		screen.displayMessageLine("3 - Deposit funds");
+		screen.displayMessageLine("4 - Exit\n");
+		screen.displayMessage("Enter a choice: ");
+		return keypad.getInput(); // return user's selection
+	}
+	
 	protected Boolean performTransactions(int mainMenuSelection) {
 		Transaction currentTransaction = null;
 
@@ -84,37 +93,24 @@ public class ATM {
 		return userExited;
 	}
 
-	// display the main menu and return an input selection
-	private int displayMainMenu() {
-		screen.displayMessageLine("\nMain menu:");
-		screen.displayMessageLine("1 - View my balance");
-		screen.displayMessageLine("2 - Withdraw cash");
-		screen.displayMessageLine("3 - Deposit funds");
-		screen.displayMessageLine("4 - Exit\n");
-		screen.displayMessage("Enter a choice: ");
-		return keypad.getInput(); // return user's selection
-	} // end method displayMainMenu
-
-	// return object of specified Transaction subclass
 	public Transaction createTransaction(int type) {
-		Transaction temp = null; // temporary Transaction variable
+		Transaction temp = null;
 
-		// determine which type of Transaction to create
 		Integer numberAccount = Bootstrapper.user().getAccount().getNumber();
 		switch (type) {
-		case BALANCE_INQUIRY: // create new BalanceInquiry transaction
+		case BALANCE_INQUIRY:
 			temp = new BalanceInquiry(numberAccount, screen, accountService);
 			break;
-		case WITHDRAWAL: // create new Withdrawal transaction
+		case WITHDRAWAL:
 			temp = new Withdrawal(numberAccount, screen, accountService, cashDispenser);
 			break;
-		case DEPOSIT: // create new Deposit transaction
+		case DEPOSIT:
 			temp = new Deposit(numberAccount, screen, accountService, depositSlot);
 			break;
-		} // end switch
+		}
 
-		return temp; // return the newly created object
-	} // end method createTransaction
+		return temp;
+	}
 
 	public int getCurrentAccountNumber() {
 		return currentAccountNumber;
@@ -124,16 +120,3 @@ public class ATM {
 		this.currentAccountNumber = currentAccountNumber;
 	}
 } // end class ATM
-
-/**************************************************************************
- * (C) Copyright 1992-2014 by Deitel & Associates, Inc. and * Pearson Education,
- * Inc. All Rights Reserved. * * DISCLAIMER: The authors and publisher of this
- * book have used their * best efforts in preparing the book. These efforts
- * include the * development, research, and testing of the theories and programs
- * * to determine their effectiveness. The authors and publisher make * no
- * warranty of any kind, expressed or implied, with regard to these * programs
- * or to the documentation contained in these books. The authors * and publisher
- * shall not be liable in any event for incidental or * consequential damages in
- * connection with, or arising out of, the * furnishing, performance, or use of
- * these programs. *
- *************************************************************************/
