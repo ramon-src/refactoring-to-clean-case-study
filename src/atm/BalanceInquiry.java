@@ -6,14 +6,12 @@ import services.AccountService;
 
 public class BalanceInquiry extends Transaction
 {
-   // BalanceInquiry constructor
-   public BalanceInquiry(int userAccountNumber, Screen atmScreen, 
-      AccountService atmBankDatabase)
+	
+   public BalanceInquiry()
    {
-      super(userAccountNumber, atmScreen, atmBankDatabase);
-   } // end BalanceInquiry constructor
+      super(0, new Screen(), new AccountService());
+   }
 
-   // performs the transaction
    @Override
    public void execute()
    {
