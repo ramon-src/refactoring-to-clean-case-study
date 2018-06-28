@@ -9,9 +9,14 @@ dependencies {
 }
 
 sourceSets {
+	main {
+        java {
+            srcDirs 'src'
+        }
+    }
    	test {
         java {
-            srcDirs = ["tests/"]
+            srcDirs = ['tests/']
         }
     }
 }
