@@ -12,6 +12,12 @@ public class TransactionController {
 		transaction = factory.getTransaction(transactionType);
 	}
 
+	public TransactionController(Integer transactionType, Integer value) {
+		factory = new TransactionFactory();
+		transaction = factory.getTransaction(transactionType);
+		transaction.setValue(value);
+	}
+	
 	public Transaction getTransaction() {
 		return transaction;
 	}

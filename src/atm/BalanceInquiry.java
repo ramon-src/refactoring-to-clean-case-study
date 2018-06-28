@@ -28,6 +28,12 @@ public class BalanceInquiry extends Transaction
       screen.displayDollarAmount(totalBalance);
       screen.displayMessageLine("");
    } // end method execute
+
+	@Override
+	public void setValue(Integer value) {
+		// TODO Auto-generated method stub
+		
+	}
 } // end class BalanceInquiry
 
 

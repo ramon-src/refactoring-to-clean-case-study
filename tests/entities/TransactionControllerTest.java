@@ -26,18 +26,13 @@ public class TransactionControllerTest extends SuiteTest{
 
 		assertEquals(1160, Bootstrapper.user().getAccount().getTotalBalance(), 0);
 	}
-
+	
 	@Test
-	public void shouldPerformTransactionDeposit() {
+	public void shouldPerformTransactionDepositWithValue() {
 		User user = new User();
 		user.setAccount(Bootstrapper.getAccountRepo().find(12345));
 		Bootstrapper.setUser(user);
-		TransactionController transactionController = new TransactionController(3);
-		Deposit deposit = (Deposit) transactionController.getTransaction();
-		KeypadMock keyPad = new KeypadMock();
-		keyPad.setInput(10000);
-		deposit.setKeypad(keyPad);
-		
+		TransactionController transactionController = new TransactionController(3, 10000);		
 		transactionController.performTransaction();
 
 		assertEquals(1300, Bootstrapper.user().getAccount().getTotalBalance(), 0);

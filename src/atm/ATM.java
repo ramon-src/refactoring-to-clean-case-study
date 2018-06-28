@@ -10,12 +10,14 @@ public class ATM {
 	private Screen screen;
 	private Input keypad;
 	private AuthService auth;
-
+	private DepositSlotService depositSlotService;
 
 	public ATM() {
 		screen = new Screen();
-		keypad = new Keypad();
+		setKeypad(new Keypad());
 		auth = new AuthService();
+		depositSlotService = new DepositSlotService();
+		
 	}
 
 	public void run() {
@@ -25,9 +27,9 @@ public class ATM {
 			while (!Bootstrapper.user().isAuthenticated()) {
 				screen.displayMessageLine("\nWelcome!");
 				screen.displayMessage("\nPlease enter your account number: ");
-				int accountNumber = keypad.getInput();
+				int accountNumber = getKeypad().getInput();
 				screen.displayMessage("\nEnter your PIN: ");
-				int pin = keypad.getInput();
+				int pin = getKeypad().getInput();
 
 				Boolean isAuthenticated = auth.authenticate(accountNumber, pin);
 				if (!isAuthenticated)
@@ -37,21 +39,48 @@ public class ATM {
 			boolean userExited = false;
 			while (!userExited) {
 				int menuSelected = displayMainMenu();
-				
-				if(menuSelected == 4) {
+
+				if (menuSelected == 4) {
 					screen.displayMessageLine("\nExiting the system...");
 					break;
 				}
 
-				if(menuSelected < 4) {
-					TransactionController transactionController = new TransactionController(menuSelected);
-					transactionController.performTransaction();
+				if (menuSelected < 4) {
+					switch (menuSelected) {
+					case 1:
+						new TransactionController(menuSelected).performTransaction();
+						break;
+					case 2:
+						new TransactionController(menuSelected).performTransaction();
+						break;
+					case 3:
+						screen.displayMessage("\nPlease enter a deposit amount in CENTS (or 0 to cancel): ");
+						int amountValue = getKeypad().getInput();
+						
+						if(amountValue == 0) {
+							screen.displayMessageLine("\nCanceling transaction...");
+							break;
+						}
+						screen.displayMessage("\nPlease insert a deposit envelope containing ");
+						screen.displayDollarAmount(amountValue);
+						screen.displayMessageLine(".");
+
+						if (depositSlotService.isEnvelopeReceived()) {
+							screen.displayMessageLine("\nYour envelope has been "
+									+ "received.\nNOTE: The money just deposited will not "
+									+ "be available until we verify the amount of any " + "enclosed cash and your checks clear.");
+							new TransactionController(menuSelected, amountValue).performTransaction();
+						} else {
+							screen.displayMessageLine("\nYou did not insert an envelope, so the ATM has canceled your transaction.");
+						}
+						break;
+
+					}
 				}
-				
-				if(menuSelected > 4)
+				if (menuSelected > 4)
 					screen.displayMessageLine("\nYou did not enter a valid selection. Try again.");
 			}
-			
+
 			Bootstrapper.setUser(null);
 			screen.displayMessageLine("\nThank you! Goodbye!");
 		}
@@ -64,7 +93,15 @@ public class ATM {
 		screen.displayMessageLine("3 - Deposit funds");
 		screen.displayMessageLine("4 - Exit\n");
 		screen.displayMessage("Enter a choice: ");
-		return keypad.getInput();
+		return getKeypad().getInput();
 	}
-	
+
+	public Input getKeypad() {
+		return keypad;
+	}
+
+	public void setKeypad(Input keypad) {
+		this.keypad = keypad;
+	}
+
 }

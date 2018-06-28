@@ -27,5 +27,6 @@ public abstract class Transaction {
 	}
 
 	abstract public void execute();
+	abstract public void setValue(Integer value);
 
 }

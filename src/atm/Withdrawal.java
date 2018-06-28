@@ -128,4 +128,10 @@ public class Withdrawal extends Transaction {
 	public void setKeypad(Input keypad) {
 		this.keypad = keypad;
 	}
+
+	@Override
+	public void setValue(Integer value) {
+		// TODO Auto-generated method stub
+		
+	}
 }
