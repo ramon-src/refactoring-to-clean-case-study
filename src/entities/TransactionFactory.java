@@ -3,7 +3,6 @@ package entities;
 import atm.BalanceInquiry;
 import atm.CashDispenser;
 import atm.Deposit;
-import atm.DepositSlot;
 import atm.Screen;
 import atm.Transaction;
 import atm.Withdrawal;

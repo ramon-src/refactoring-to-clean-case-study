@@ -13,7 +13,7 @@ import services.AccountService;
 public class TransactionTest extends SuiteTest{
 
 	@Test
-	public void shouldInitializeTransaction() {
+	public void shouldInitializeTransactionWhenInstantiate() {
 		Account account = new Account(12345, 54321L, 10, 10);
 		User user = new User();
 		user.setAccount(account);
@@ -25,6 +25,6 @@ public class TransactionTest extends SuiteTest{
 
 		assertEquals(Screen.class, deposit.getScreen().getClass());
 
-		assertEquals(AccountService.class, deposit.getBankDatabase().getClass());
+		assertEquals(AccountService.class, deposit.getAccountService().getClass());
 	}
 }

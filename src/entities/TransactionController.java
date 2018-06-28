@@ -5,14 +5,19 @@ import atm.Transaction;
 public class TransactionController {
 
 	private TransactionFactory factory;
+	private Transaction transaction;
 	
-	public TransactionController() {
+	public TransactionController(Integer transactionType) {
 		factory = new TransactionFactory();
+		transaction = factory.getTransaction(transactionType);
+	}
+
+	public Transaction getTransaction() {
+		return transaction;
 	}
 	
-	public void performTransaction(int type) {
-		Transaction transaction = factory.getTransaction(type);
-		transaction.execute();
+	public void performTransaction() {
+		getTransaction().execute();
 	}
 	
 }

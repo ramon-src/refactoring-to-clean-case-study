@@ -18,7 +18,7 @@ public class BalanceInquiry extends Transaction
    public void execute()
    {
       // get references to bank database and screen
-      AccountService bankDatabase = getBankDatabase();
+      AccountService bankDatabase = getAccountService();
       Screen screen = getScreen();
 
       // get the available balance for the account involved

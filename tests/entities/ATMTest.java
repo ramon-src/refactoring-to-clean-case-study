@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import atm.ATM;
 import atm.Deposit;
 import atm.Withdrawal;
 import main.Bootstrapper;
@@ -14,35 +13,35 @@ public class ATMTest extends SuiteTest{
 
 	@Test
 	public void shouldPerformWithdrawalAction() {
-		ATM atm = new ATM();
 		Account account = new Account(12345, 54321L, 10, 10);
 		User user = new User();
 		user.setAccount(account);
 		Bootstrapper.setUser(user);
-		Withdrawal transaction = (Withdrawal) atm.createTransaction(2);
+		TransactionController transactionController = new TransactionController(2);
+		Withdrawal transaction = (Withdrawal) transactionController.getTransaction();
 		KeypadMock keypad = new KeypadMock();
 		keypad.setInput(2);
 		
 		transaction.setKeypad(keypad);
 		transaction.execute();
-		Double balanceResult = transaction.getBankDatabase().getTotalBalance(12345);
+		Double balanceResult = transaction.getAccountService().getTotalBalance(12345);
 		assertEquals(1160, balanceResult, 0);
 	}
 
 	@Test
 	public void shouldPerformDepositAction() {
-		ATM atm = new ATM();
 		Account account = new Account(12345, 54321L, 10, 10);
 		User user = new User();
 		user.setAccount(account);
 		Bootstrapper.setUser(user);
-		Deposit transaction = (Deposit) atm.createTransaction(3);
+		TransactionController transactionController = new TransactionController(3);
+		Deposit transaction = (Deposit) transactionController.getTransaction();
 		KeypadMock keypad = new KeypadMock();
 		keypad.setInput(10000);
 		
 		transaction.setKeypad(keypad);
 		transaction.execute();
-		Double balanceResult = transaction.getBankDatabase().getTotalBalance(12345);
+		Double balanceResult = transaction.getAccountService().getTotalBalance(12345);
 		assertEquals(1300, balanceResult, 0);
 	}
 }

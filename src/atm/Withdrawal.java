@@ -32,7 +32,7 @@ public class Withdrawal extends Transaction {
 		double availableBalance; // amount available for withdrawal
 
 		// get references to bank database and screen
-		AccountService bankDatabase = getBankDatabase();
+		AccountService bankDatabase = getAccountService();
 		Screen screen = getScreen();
 
 		// loop until cash is dispensed or the user cancels
@@ -137,17 +137,4 @@ public class Withdrawal extends Transaction {
 	public void setKeypad(Input keypad) {
 		this.keypad = keypad;
 	}
-} // end class Withdrawal
-
-/**************************************************************************
- * (C) Copyright 1992-2014 by Deitel & Associates, Inc. and * Pearson Education,
- * Inc. All Rights Reserved. * * DISCLAIMER: The authors and publisher of this
- * book have used their * best efforts in preparing the book. These efforts
- * include the * development, research, and testing of the theories and programs
- * * to determine their effectiveness. The authors and publisher make * no
- * warranty of any kind, expressed or implied, with regard to these * programs
- * or to the documentation contained in these books. The authors * and publisher
- * shall not be liable in any event for incidental or * consequential damages in
- * connection with, or arising out of, the * furnishing, performance, or use of
- * these programs. *
- *************************************************************************/
+}
