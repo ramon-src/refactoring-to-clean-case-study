@@ -8,4 +8,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
+sourceSets {
+   	test {
+        java {
+            srcDirs = ["tests/"]
+        }
+    }
+}
 version = '1.0'
