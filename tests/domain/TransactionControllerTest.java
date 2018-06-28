@@ -8,7 +8,7 @@ import entities.SuiteTest;
 import main.Bootstrapper;
 
 public class TransactionControllerTest extends SuiteTest{
-
+	
 	@Test
 	public void shouldPerformTransactionWithdrawal() {
 		User user = new User();

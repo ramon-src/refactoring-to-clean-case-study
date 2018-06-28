@@ -52,7 +52,7 @@ public class UI {
 				if (menuSelected < 4) {
 					switch (menuSelected) {
 					case 1:
-						new TransactionController(menuSelected).performTransaction();
+						new TransactionController(menuSelected, null).performTransaction();
 						break;
 					case 2:
 						Integer amount = 0;
