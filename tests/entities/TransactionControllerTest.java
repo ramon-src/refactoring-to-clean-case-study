@@ -16,14 +16,9 @@ public class TransactionControllerTest extends SuiteTest{
 		User user = new User();
 		user.setAccount(Bootstrapper.getAccountRepo().find(12345));
 		Bootstrapper.setUser(user);
-		TransactionController transactionController = new TransactionController(2);
-		Withdrawal withdrawal = (Withdrawal) transactionController.getTransaction();
-		KeypadMock keyPad = new KeypadMock();
-		keyPad.setInput(2);
-		withdrawal.setKeypad(keyPad);
-		
+		TransactionController transactionController = new TransactionController(2, 40);
 		transactionController.performTransaction();
-
+		
 		assertEquals(1160, Bootstrapper.user().getAccount().getTotalBalance(), 0);
 	}
 	
