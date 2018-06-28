@@ -1,39 +1,37 @@
-package atm;
+package ui;
 
-import entities.TransactionController;
+import domain.TransactionController;
 import main.Bootstrapper;
 import services.AccountService;
 import services.AuthService;
-import ui.Input;
-import ui.Keypad;
+import services.CashDispenserService;
+import services.DepositSlotService;
 
-public class ATM {
+public class UI {
 	private Screen screen;
 	private Input keypad;
 	private AuthService auth;
 	private DepositSlotService depositSlotService;
 	private AccountService accountService;
-	private CashDispenser cashDispenser;
+	private CashDispenserService cashDispenser;
 
-	public ATM() {
+	public UI() {
 		screen = new Screen();
 		setKeypad(new Keypad());
 		auth = new AuthService();
 		depositSlotService = new DepositSlotService();
 		accountService = new AccountService();
-		cashDispenser = new CashDispenser();
+		cashDispenser = new CashDispenserService();
 	}
 
-	public void run() {
-
+	public void menu() {
 		while (true) {
-
 			while (!Bootstrapper.user().isAuthenticated()) {
 				screen.displayMessageLine("\nWelcome!");
 				screen.displayMessage("\nPlease enter your account number: ");
-				
+
 				int accountNumber = getKeypad().getInput();
-				
+
 				screen.displayMessage("\nEnter your PIN: ");
 				int pin = getKeypad().getInput();
 
@@ -140,7 +138,7 @@ public class ATM {
 					screen.displayMessageLine("\nYou did not enter a valid selection. Try again.");
 			}
 
-			Bootstrapper.setUser(null);
+			Bootstrapper.initDependencies();
 			screen.displayMessageLine("\nThank you! Goodbye!");
 		}
 	}

@@ -1,4 +1,6 @@
-package entities;
+package domain;
+
+import entities.Account;
 
 public class User {
 	

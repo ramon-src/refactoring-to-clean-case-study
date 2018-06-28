@@ -1,7 +1,8 @@
-package atm;
+package domain;
 
 import main.Bootstrapper;
 import services.AccountService;
+import ui.Screen;
 
 public abstract class Transaction {
 	private int accountNumber;

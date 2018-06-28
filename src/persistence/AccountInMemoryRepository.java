@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entities.Account;
-import entities.DataRepository;
 
 public class AccountInMemoryRepository implements DataRepository<Account>{
 

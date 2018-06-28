@@ -1,13 +1,11 @@
-package entities;
+package domain;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import atm.Deposit;
-import atm.Withdrawal;
+import entities.SuiteTest;
 import main.Bootstrapper;
-import mocks.KeypadMock;
 
 public class TransactionControllerTest extends SuiteTest{
 

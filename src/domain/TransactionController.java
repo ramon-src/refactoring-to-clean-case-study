@@ -1,6 +1,4 @@
-package entities;
-
-import atm.Transaction;
+package domain;
 
 public class TransactionController {
 

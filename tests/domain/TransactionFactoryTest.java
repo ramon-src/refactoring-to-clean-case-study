@@ -1,13 +1,11 @@
-package entities;
+package domain;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import atm.BalanceInquiry;
-import atm.Deposit;
-import atm.Withdrawal;
+import entities.SuiteTest;
 
 public class TransactionFactoryTest extends SuiteTest{
 	

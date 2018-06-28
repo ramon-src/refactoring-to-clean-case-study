@@ -1,4 +1,4 @@
-package atm;
+package domain;
 
 import entities.SuiteTest;
 

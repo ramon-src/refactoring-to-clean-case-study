@@ -1,7 +1,7 @@
 package services;
 
+import domain.User;
 import entities.Account;
-import entities.User;
 import main.Bootstrapper;
 
 public class AuthService {

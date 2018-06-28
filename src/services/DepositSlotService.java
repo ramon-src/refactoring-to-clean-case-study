@@ -1,4 +1,4 @@
-package atm;
+package services;
 
 public class DepositSlotService {
 	// indicates whether envelope was received (always returns true,

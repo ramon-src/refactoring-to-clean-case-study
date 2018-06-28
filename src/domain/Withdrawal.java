@@ -1,4 +1,4 @@
-package atm;
+package domain;
 
 public class Withdrawal extends Transaction {
 	private int amount;

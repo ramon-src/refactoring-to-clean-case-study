@@ -1,6 +1,7 @@
-package atm;
+package domain;
 
 import services.AccountService;
+import ui.Screen;
 
 public class BalanceInquiry extends Transaction
 {

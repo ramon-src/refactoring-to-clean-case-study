@@ -1,9 +1,9 @@
 
 package main;
 
-import atm.ATM;
-import entities.User;
+import domain.User;
 import persistence.AccountInMemoryRepository;
+import ui.UI;
 
 public class Bootstrapper
 {
@@ -13,8 +13,8 @@ public class Bootstrapper
 	public static void main(String[] args) {
 		initDependencies();
 		
-		ATM theATM = new ATM();
-		theATM.run();
+		UI ui = new UI();
+		ui.menu();
 	}
 
 	public static void initDependencies() {

@@ -1,14 +1,15 @@
-package atm;
+package domain;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import domain.Deposit;
 import entities.Account;
 import entities.SuiteTest;
-import entities.User;
 import main.Bootstrapper;
 import services.AccountService;
+import ui.Screen;
 
 public class TransactionTest extends SuiteTest{
 

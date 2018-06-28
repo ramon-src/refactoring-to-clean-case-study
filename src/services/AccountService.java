@@ -1,8 +1,8 @@
 package services;
 
 import entities.Account;
-import entities.DataRepository;
 import main.Bootstrapper;
+import persistence.DataRepository;
 
 public class AccountService {
 	private DataRepository<Account> accountRepo;

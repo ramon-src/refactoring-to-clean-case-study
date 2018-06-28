@@ -1,9 +1,4 @@
-package entities;
-
-import atm.BalanceInquiry;
-import atm.Deposit;
-import atm.Transaction;
-import atm.Withdrawal;
+package domain;
 
 public class TransactionFactory {
 	

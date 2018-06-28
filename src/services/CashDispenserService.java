@@ -1,15 +1,15 @@
 // CashDispenser.java
 // Represents the cash dispenser of the ATM
-package atm;
+package services;
 
-public class CashDispenser 
+public class CashDispenserService 
 {
    // the default initial number of bills in the cash dispenser
    private final static int INITIAL_COUNT = 500;
    private int count; // number of $20 bills remaining
    
    // no-argument CashDispenser constructor initializes count to default
-   public CashDispenser()
+   public CashDispenserService()
    {
       setCount(INITIAL_COUNT); // set count attribute to default
    } // end CashDispenser constructor

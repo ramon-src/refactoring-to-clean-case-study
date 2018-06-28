@@ -2,6 +2,7 @@ package entities;
 
 import org.junit.Before;
 
+import domain.User;
 import main.Bootstrapper;
 
 public class SuiteTest {

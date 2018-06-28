@@ -1,4 +1,4 @@
-package atm;
+package domain;
 
 public class Deposit extends Transaction {
 	private double amount;
