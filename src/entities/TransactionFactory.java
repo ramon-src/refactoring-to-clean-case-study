@@ -1,7 +1,6 @@
 package entities;
 
 import atm.BalanceInquiry;
-import atm.CashDispenser;
 import atm.Deposit;
 import atm.Screen;
 import atm.Transaction;
@@ -16,7 +15,7 @@ public class TransactionFactory {
 			return new BalanceInquiry(0, new Screen(), new AccountService());
 		}
 		if (type.equals(TransactionType.WITHDRAWAL)) {
-			return new Withdrawal(0, new Screen(), new AccountService(), new CashDispenser());
+			return new Withdrawal();
 		}
 		if (type.equals(TransactionType.DEPOSIT)) {
 			return new Deposit();
