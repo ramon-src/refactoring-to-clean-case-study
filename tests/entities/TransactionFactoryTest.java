@@ -15,6 +15,7 @@ public class TransactionFactoryTest extends SuiteTest{
 	
 	@Before
 	public void initialize(){ 
+		super.initialize();
 		factory = new TransactionFactory();
 	}
 	
