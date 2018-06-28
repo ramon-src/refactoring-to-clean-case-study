@@ -1,6 +1,5 @@
 package atm;
 
-import services.AccountService;
 import ui.Input;
 import ui.Keypad;
 
@@ -11,9 +10,6 @@ public class Deposit extends Transaction {
 	private final static int CANCELED = 0;
 
 	public Deposit() {
-
-		super(0, new Screen(), new AccountService());
-
 		setKeypad(new Keypad());
 		depositSlot = new DepositSlot();
 	}

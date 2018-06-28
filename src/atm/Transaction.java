@@ -8,7 +8,7 @@ public abstract class Transaction {
 	private Screen screen;
 	private AccountService accountService;
 
-	public Transaction(int userAccountNumber, Screen atmScreen, AccountService atmBankDatabase) {
+	public Transaction() {
 		accountNumber = Bootstrapper.user().getAccount().getNumber();
 		screen = new Screen();
 		accountService = new AccountService();

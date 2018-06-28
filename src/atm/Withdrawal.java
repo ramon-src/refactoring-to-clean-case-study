@@ -1,5 +1,3 @@
-// Withdrawal.java
-// Represents a withdrawal ATM transaction
 package atm;
 
 import services.AccountService;
@@ -11,12 +9,9 @@ public class Withdrawal extends Transaction {
 	private Input keypad; // reference to keypad
 	private CashDispenser cashDispenser; // reference to cash dispenser
 
-	// constant corresponding to menu option to cancel
 	private final static int CANCELED = 6;
 
 	public Withdrawal() {
-		super(0, new Screen(), new AccountService());
-
 		setKeypad(new Keypad());
 		setCashDispenser(new CashDispenser());
 	}

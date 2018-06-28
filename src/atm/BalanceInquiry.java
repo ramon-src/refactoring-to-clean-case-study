@@ -1,5 +1,3 @@
-// BalanceInquiry.java
-// Represents a balance inquiry ATM transaction
 package atm;
 
 import services.AccountService;
@@ -7,11 +5,6 @@ import services.AccountService;
 public class BalanceInquiry extends Transaction
 {
 	
-   public BalanceInquiry()
-   {
-      super(0, new Screen(), new AccountService());
-   }
-
    @Override
    public void execute()
    {
