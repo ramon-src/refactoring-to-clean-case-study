@@ -24,8 +24,6 @@ public class TransactionTest extends SuiteTest{
 		
 		assertEquals(12345, deposit.getAccountNumber());
 
-		assertEquals(Screen.class, deposit.getScreen().getClass());
-
 		assertEquals(AccountService.class, deposit.getAccountService().getClass());
 	}
 }
